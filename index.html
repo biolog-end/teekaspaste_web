@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeekasPaste Spells - Windows 98 Edition</title>
+    <meta name="theme-color" content="#008080">
+    <meta name="description" content="Welcome to TeekasPaste Spells - Your arcane pattern repository. Best viewed in 800x600 resolution.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="gifs/sphere.gif" type="image/gif">
+</head>
+<body>
+    <div class="main-window">
+        <div class="title-bar">
+            <span class="title-bar-text">
+                <img src="gifs/sphere.gif" alt="icon">
+                TeekasPaste Spells - Arcane Pattern Repository
+            </span>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize">_</button>
+                <button aria-label="Maximize">[]</button>
+                <button aria-label="Close">X</button>
+            </div>
+        </div>
+
+        <div class="window-body">
+            <div class="marquee-container">
+                <span class="marquee-text">
+                    *** WELCOME TO TEEKASPASTE SPELLS *** Your #1 Source for Hexcasting Patterns *** BEST VIEWED IN 800x600 *** YOU ARE VISITOR #<span id="visitor-count-marquee">000000</span> *** BOOKMARK THIS PAGE! (Ctrl+D) *** LAST UPDATED: <span id="last-updated"></span> *** MAGIC AWAITS ***
+                </span>
+            </div>
+
+            <header>
+                <div class="header-gifs">
+                    <img src="gifs/sphere.gif" alt="Magic Sphere">
+                    <img src="gifs/frieren.gif" alt="Wizard">
+                    <img src="gifs/sphere.gif" alt="Magic Sphere">
+                </div>
+                
+                <h1>TeekasPaste Spells</h1>
+                <p class="subtitle">~ A Repository of Arcane Patterns for the Modern Hexcaster ~</p>
+                
+                <!-- Visitor Counter -->
+                <div class="visitor-counter">
+                    <div class="counter-label">You are visitor number:</div>
+                    <div class="counter-display">
+                        <span class="counter-number" id="visitor-count">000000</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- GIF Divider -->
+            <div class="gif-divider">
+                <img src="gifs/heartFrame.gif" alt="divider">
+                <img src="gifs/heartfull.gif" alt="divider">
+                <img src="gifs/heartFrame.gif" alt="divider">
+                <img src="gifs/heartfull.gif" alt="divider">
+                <img src="gifs/heartFrame.gif" alt="divider">
+            </div>
+
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <button class="toolbar-btn" onclick="filterSpells('all')">
+                    <img src="gifs/sphere.gif" alt=""> All Spells
+                </button>
+                <button class="toolbar-btn" onclick="filterSpells('utility')">
+                    <img src="gifs/magnet.gif" alt=""> Utility
+                </button>
+                <button class="toolbar-btn" onclick="filterSpells('combat')">
+                    <img src="gifs/lavacage.gif" alt=""> Combat
+                </button>
+                <button class="toolbar-btn" onclick="filterSpells('construction')">
+                    <img src="gifs/blueprint_builder.gif" alt=""> Construction
+                </button>
+                <button class="toolbar-btn" onclick="filterSpells('movement')">
+                    <img src="gifs/elytra.gif" alt=""> Movement
+                </button>
+            </div>
+
+            <!-- Main Spell Grid -->
+            <div id="spell-grid" class="spell-grid"></div>
+
+            <div class="gif-divider">
+                <img src="gifs/tunnel.gif" alt="divider">
+                <img src="gifs/stairs.gif" alt="divider">
+                <img src="gifs/terraform.gif" alt="divider">
+                <img src="gifs/wall_maker.gif" alt="divider">
+            </div>
+
+            <footer>
+                <div class="footer-gifs">
+                    <img class="footer-badge" src="gifs/blueprint_maker.gif" alt="Made with Magic">
+                    <img class="footer-badge" src="gifs/sphere_circle.gif" alt="Hexcasting Approved">
+                    <img class="footer-badge" src="gifs/elytra.gif" alt="Best with Netscape">
+                </div>
+                
+                <p>Built with arcane knowledge for <a href="https://github.com/biolog-end/teekaspaste" target="_blank">TeekasPaste</a> mod</p>
+                
+                <div class="webring">
+                    <div class="webring-title">HEXCASTING WEBRING</div>
+                    <div class="webring-links">
+                        <a href="#">[&lt;&lt; PREV]</a>
+                        <a href="#">[RANDOM]</a>
+                        <a href="#">[LIST]</a>
+                        <a href="#">[NEXT &gt;&gt;]</a>
+                    </div>
+                </div>
+                
+                <div class="guestbook-container">
+                    <a href="#" class="guestbook-btn">Sign My Guestbook!</a>
+                </div>
+                
+                <div class="under-construction">
+                    <img src="gifs/sphere.gif" alt="construction">
+                    <span class="construction-text">MORE SPELLS COMING SOON!</span>
+                    <img src="gifs/sphere.gif" alt="construction">
+                </div>
+                
+                <p>Copyright 1999-<span id="current-year"></span> TeekasPaste Spells | Optimized for 800x600</p>
+            </footer>
+
+            <div class="status-bar">
+                <span class="status-bar-field">Ready</span>
+                <span class="status-bar-field" id="spell-count">Spells loaded: 0</span>
+                <span class="status-bar-field" id="current-time"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="spells.js"></script>
+    <script src="main.js"></script>
+    
+    <script>
+        const visitorCount = Math.floor(Math.random() * 900000 + 100000);
+        document.getElementById('visitor-count').textContent = visitorCount.toString().padStart(6, '0');
+        document.getElementById('visitor-count-marquee').textContent = visitorCount.toString().padStart(6, '0');
+        
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const now = new Date();
+        document.getElementById('last-updated').textContent = months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+        
+        function updateTime() {
+            const time = new Date().toLocaleTimeString();
+            document.getElementById('current-time').textContent = time;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        window.filterSpells = function(type) {
+            const cards = document.querySelectorAll('.spell-card');
+            cards.forEach(card => {
+                if (type === 'all') {
+                    card.style.display = '';
+                } else {
+                    const tags = card.querySelectorAll('.tag');
+                    let hasType = false;
+                    tags.forEach(tag => {
+                        if (tag.classList.contains('type-' + type)) {
+                            hasType = true;
+                        }
+                    });
+                    card.style.display = hasType ? '' : 'none';
+                }
+            });
+        };
+    </script>
+</body>
+</html>
